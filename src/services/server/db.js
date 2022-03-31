@@ -1,15 +1,15 @@
 import mongoose from 'mongoose';
 import getConfig from '../config';
 
-const { mongo } = getConfig;
+const { database } = getConfig;
 
 export const initializeDB = async (callback) => {
   try {
-    await mongoose.connect(mongo.uri, mongo.options, callback);
+    await mongoose.connect(database.uri, database.options, callback);
     console.log('MongoDB connect successfully');
     return mongoose;
   } catch (error) {
     console.log('***** Mongoose failed connection *****');
-    console.error(error);
+    return console.error(error);
   }
 };

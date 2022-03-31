@@ -1,15 +1,27 @@
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
-const modelName = 'examples';
+const modelName = 'trainers'; // plural
 
 const schema = new Schema(
   {
-    fullName: {
+    firstName: {
       type: String,
+      isRequired: true,
     },
-    email: {
+    lastName: {
       type: String,
+      isRequired: true,
+    },
+    birthdate: {
+      type: Date,
+      isRequired: true,
+    },
+    phone: {
+      type: String
+    },
+    address: {
+      type: String
     },
     status: {
       type: String,
@@ -30,11 +42,11 @@ const schema = new Schema(
 schema.set('toJSON', {
   virtuals: true,
   versionKey: false,
-  // transform(_doc, ret) {
-  //   // eslint-disable-next-line no-param-reassign,no-underscore-dangle
-  //   delete ret._id;
-  // },
+  transform(_doc, ret) {
+    // eslint-disable-next-line no-param-reassign,no-underscore-dangle
+    delete ret._id;
+  },
 });
 
 // rename name Example to singular Model
-export default mongoose.models.Example || mongoose.model(modelName, schema);
+export default mongoose.models.Trainer || mongoose.model(modelName, schema);

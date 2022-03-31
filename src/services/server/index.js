@@ -12,6 +12,7 @@ const initializeServer = async (routes) => {
   // initialize DB
   await initializeDB();
 
+  app.use(express.json());
   app.use(routes);
 
   // create express app

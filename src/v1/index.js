@@ -1,8 +1,10 @@
 import express from 'express';
-import exampleRoutes from './example/example.route';
+import petRoutes from './pet/pet.route';
+import trainerRoutes from './trainer/trainer.route';
 
 const router = express.Router();
 
-router.use('/example', exampleRoutes);
+router.use('/pets', petRoutes);
+router.use('/trainers', trainerRoutes);
 
 export default router;
