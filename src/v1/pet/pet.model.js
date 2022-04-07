@@ -7,19 +7,21 @@ const schema = new Schema(
   {
     name: {
       type: String,
-      isRequired: true,
+      required: true,
     },
     birthdate: {
       type: Date,
-      isRequired: true,
+      required: true,
     },
     race: {
       type: String,
-      isRequired: true,
+      require: true,
+      required: true,
     },
     trainer: {
       type: Schema.Types.ObjectId,
-      ref: 'trainers'
+      ref: 'trainers',
+      require: true
     },
     status: {
       type: String,

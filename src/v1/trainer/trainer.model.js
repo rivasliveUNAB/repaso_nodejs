@@ -7,15 +7,15 @@ const schema = new Schema(
   {
     firstName: {
       type: String,
-      isRequired: true,
+      required: true,
     },
     lastName: {
       type: String,
-      isRequired: true,
+      required: true,
     },
     birthdate: {
       type: Date,
-      isRequired: true,
+      required: true,
     },
     phone: {
       type: String
