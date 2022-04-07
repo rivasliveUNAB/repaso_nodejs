@@ -14,7 +14,10 @@ export const getAllPets = async (req, res) => {
 
     return res.status(200).json(data);
   } catch (error) {
-    throw Error(error);
+    return res.status(500).json({
+      code: 500,
+      message: 'No se pudo recuperar los datos',
+    });
   }
 };
 
@@ -28,7 +31,10 @@ export const getPetById = async (req, res) => {
     ]);
     return res.status(200).json(data);
   } catch (error) {
-    throw Error(error);
+    return res.status(500).json({
+      code: 500,
+      message: 'No se pudo recuperar el registro',
+    });
   }
 };
 
@@ -42,15 +48,18 @@ export const createPet = async (req, res) => {
   }
 
   try {
-    const pet = await PetModel.create({
+    const data = await PetModel.create({
       name: body.name,
       birthdate: body.birthdate,
       race: body.race,
       trainer: body.trainer,
     });
-    return res.status(200).json(pet);
+    return res.status(200).json(data);
   } catch (error) {
-    throw Error(error);
+    return res.status(500).json({
+      code: 500,
+      message: 'No se pudo crear el registro',
+    });
   }
 };
 
@@ -65,7 +74,7 @@ export const updatePet = async (req, res) => {
   }
 
   try {
-    const pet = await PetModel.findOneAndUpdate(
+    const data = await PetModel.findOneAndUpdate(
       { _id: idPet },
       {
         name: body.name,
@@ -74,9 +83,12 @@ export const updatePet = async (req, res) => {
         trainer: body.trainer,
       }
     );
-    return res.status(200).json(Object.assign(pet, body));
+    return res.status(200).json(Object.assign(data, body));
   } catch (error) {
-    throw Error(error);
+    return res.status(500).json({
+      code: 500,
+      message: 'No se pudo actualizar el registro',
+    });
   }
 };
 
@@ -85,16 +97,19 @@ export const deletePet = async (req, res) => {
   const { idPet } = params;
 
   try {
-    const pet = await PetModel.findOneAndUpdate(
+    const data = await PetModel.findOneAndUpdate(
       { _id: idPet },
       { status: 'inactive' }
     );
 
     return res.status(200).json({
-      ...pet,
+      ...data,
       status: 'inactive',
     });
   } catch (error) {
-    throw Error(error);
+    return res.status(500).json({
+      code: 500,
+      message: 'No se pudo eliminar el registro',
+    });
   }
 };

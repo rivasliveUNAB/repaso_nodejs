@@ -1,35 +1,35 @@
-import TrainerModel from './trainer.model';
+import VaccineModel from './vaccine.model';
 
-export const getAllTrainers = async (req, res) => {
+export const getAllVaccine = async (req, res) => {
   const { offset, limit } = req.params;
   const { status = 'active' } = req.query;
 
   try {
-    const data = await TrainerModel.find({ status }).skip(offset).limit(limit);
+    const data = await VaccineModel.find({ status }).skip(offset).limit(limit);
     return res.status(200).json(data);
   } catch (error) {
     return res.status(500).json({
       code: 500,
-      message: 'No se pudo obtener los registros',
+      message: 'No se pudo recuperar los registros',
     });
   }
 };
 
-export const getTrainerById = async (req, res) => {
+export const getVaccineById = async (req, res) => {
   const { idTrainer } = req.params;
 
   try {
-    const data = await TrainerModel.findById(idTrainer);
+    const data = await VaccineModel.findById(idTrainer);
     return res.status(200).json(data);
   } catch (error) {
     return res.status(500).json({
       code: 500,
-      message: 'No se pudo obtener el registro',
+      message: 'No se pudo recuperar el registro',
     });
   }
 };
 
-export const createTrainer = async (req, res) => {
+export const createVaccine = async (req, res) => {
   const { body } = req;
 
   if (!body) {
@@ -39,7 +39,7 @@ export const createTrainer = async (req, res) => {
   }
 
   try {
-    const data = await TrainerModel.create(body);
+    const data = await VaccineModel.create(body);
     return res.status(200).json(data);
   } catch (error) {
     return res.status(500).json({
@@ -49,9 +49,9 @@ export const createTrainer = async (req, res) => {
   }
 };
 
-export const updateTrainer = async (req, res) => {
+export const updateVaccine = async (req, res) => {
   const { body, params } = req;
-  const { idTrainer } = params;
+  const { idVaccine } = params;
 
   if (!body) {
     return res.status(400).json({
@@ -60,7 +60,7 @@ export const updateTrainer = async (req, res) => {
   }
 
   try {
-    const data = await TrainerModel.findOneAndUpdate({ _id: idTrainer }, body);
+    const data = await VaccineModel.findOneAndUpdate({ _id: idVaccine }, body);
     return res.status(200).json(Object.assign(data, body));
   } catch (error) {
     return res.status(500).json({
@@ -70,12 +70,12 @@ export const updateTrainer = async (req, res) => {
   }
 };
 
-export const deleteTrainer = async (req, res) => {
+export const deleteVaccine = async (req, res) => {
   const { params } = req;
-  const { idTrainer } = params;
+  const { idVaccine } = params;
 
   try {
-    const data = await TrainerModel.findOneAndUpdate({ _id: idTrainer }, {
+    const data = await VaccineModel.findOneAndUpdate({ _id: idVaccine }, {
       status: 'inactive',
     });
     return res.status(200).json(Object.assign(data, { status: 'inactive' }));

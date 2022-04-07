@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
-import { modelName as trainerModelName } from '../trainer/trainer.model';
 
 const { Schema } = mongoose;
-export const modelName = 'pets'; // plural
+export const modelName = 'vaccines'; // plural
 
 const schema = new Schema(
   {
@@ -10,19 +9,20 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    birthdate: {
-      type: Date,
-      required: true,
-    },
-    race: {
+    description: {
       type: String,
-      require: true,
       required: true,
     },
-    trainer: {
-      type: Schema.Types.ObjectId,
-      ref: trainerModelName,
-      require: true
+    effect_secondary: {
+      type: String,
+      required: true,
+    },
+    supplier: {
+      type: String,
+      required: true,
+    },
+    supplier_phone: {
+      type: String
     },
     status: {
       type: String,
@@ -50,4 +50,4 @@ schema.set('toJSON', {
 });
 
 // rename name Example to singular Model
-export default mongoose.models.Pet || mongoose.model(modelName, schema);
+export default mongoose.models.Vaccine || mongoose.model(modelName, schema);

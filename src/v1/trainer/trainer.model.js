@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
-const modelName = 'trainers'; // plural
+export const modelName = 'trainers'; // plural
 
 const schema = new Schema(
   {

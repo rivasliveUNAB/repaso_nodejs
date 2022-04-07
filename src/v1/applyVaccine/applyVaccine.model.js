@@ -1,28 +1,28 @@
 import mongoose from 'mongoose';
-import { modelName as trainerModelName } from '../trainer/trainer.model';
+import { modelName as petModelName } from '../pet/pet.model';
+import { modelName as vaccineModelName } from '../vaccine/vaccine.model';
 
 const { Schema } = mongoose;
-export const modelName = 'pets'; // plural
+export const modelName = 'applyVaccines'; // plural
 
 const schema = new Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    birthdate: {
-      type: Date,
-      required: true,
-    },
-    race: {
-      type: String,
-      require: true,
-      required: true,
-    },
-    trainer: {
+    pet: {
       type: Schema.Types.ObjectId,
-      ref: trainerModelName,
-      require: true
+      required: true,
+      ref: petModelName,
+    },
+    vaccine: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: vaccineModelName,
+    },
+    effect_secondary: {
+      type: String
+    },
+    dateApplication: {
+      type: Date,
+      default: Date.now,
     },
     status: {
       type: String,
@@ -50,4 +50,4 @@ schema.set('toJSON', {
 });
 
 // rename name Example to singular Model
-export default mongoose.models.Pet || mongoose.model(modelName, schema);
+export default mongoose.models.ApplyVaccine || mongoose.model(modelName, schema);
